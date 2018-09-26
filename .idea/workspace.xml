@@ -1,21 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="paintingBoard:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="750c0c49-c8f0-4894-85f6-600b662478fe" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entity/LabelEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/LabelEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/enums/PaintStateEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/enums/PaintStateEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ui/PaintingBoardFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/PaintingBoardFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ui/PaintingBoardFrame$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ui/PaintingBoardFrame$DrawButtonListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ui/PaintingBoardFrame$DrawListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ui/PaintingBoardFrame$NewItemActionListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ui/PaintingBoardFrame$OpenItemActionListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ui/PaintingBoardFrame$SaveAsItemActionListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ui/PaintingBoardFrame$SaveItemActionListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ui/PaintingBoardFrame.class" beforeDir="false" />
-    </list>
+    <list default="true" id="750c0c49-c8f0-4894-85f6-600b662478fe" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,8 +21,8 @@
       <file leaf-file-name="PaintingBoardFrame.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/ui/PaintingBoardFrame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="463">
-              <caret line="328" column="34" selection-start-line="328" selection-start-column="34" selection-end-line="328" selection-end-column="34" />
+            <state relative-caret-position="358">
+              <caret line="502" column="18" selection-start-line="502" selection-start-column="18" selection-end-line="502" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -199,6 +190,11 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="ui" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="paintingBoard" type="b2602c69:ProjectViewProjectNode" />
+              <item name="paintingBoard" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -303,16 +299,15 @@
       <workItem from="1537860492599" duration="3572000" />
       <workItem from="1537872113539" duration="15658000" />
       <workItem from="1537928892371" duration="1963000" />
-      <workItem from="1537964071755" duration="3230000" />
+      <workItem from="1537964071755" duration="4022000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43251000" />
+    <option name="totallyTimeSpent" value="44043000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="64" y="-11" width="1857" height="1092" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -324,11 +319,11 @@
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3301282" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3301282" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24959569" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24959569" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -702,8 +697,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ui/PaintingBoardFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="463">
-          <caret line="328" column="34" selection-start-line="328" selection-start-column="34" selection-end-line="328" selection-end-column="34" />
+        <state relative-caret-position="358">
+          <caret line="502" column="18" selection-start-line="502" selection-start-column="18" selection-end-line="502" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -716,10 +711,12 @@
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
           <artifact-editor />
+          <last-edited>paintingBoard:jar</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>
@@ -727,7 +724,7 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
-          <last-edited />
+          <last-edited>No facets are configured</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -750,7 +747,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited />
+          <last-edited>1.8 (1)</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -775,7 +772,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited />
+          <last-edited>Maven: org.hamcrest:hamcrest-core:1.1</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
