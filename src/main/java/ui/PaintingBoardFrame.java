@@ -60,7 +60,9 @@ public class PaintingBoardFrame extends JFrame{
     public PaintingBoardFrame(){
         super();
         this.setVisible(true);
+    }
 
+    public void init(){
         //当前绘画的状态
         this.curState = PaintStateEnum.TO_PAINT;
 
@@ -96,7 +98,7 @@ public class PaintingBoardFrame extends JFrame{
         this.setTitle("画板");
         this.setDefaultCloseOperation(3);
         this.setLocation(550, 250);
-        this.setSize(800, 500);
+        this.setSize(1000, 600);
         this.setLayout(new BorderLayout());
     }
 
@@ -116,6 +118,8 @@ public class PaintingBoardFrame extends JFrame{
         Graphics2D g = (Graphics2D) this.getGraphics();
         dl.setGraphic(g);
         g.setColor(Color.BLACK);
+        final Font font = new Font("BOLD",Font.BOLD,20);
+        g.setFont(font);
         g.setStroke(new BasicStroke(2));
     }
 
@@ -123,13 +127,18 @@ public class PaintingBoardFrame extends JFrame{
      * 设置左侧绘画选择栏
      * */
     private void initLeftPanel(){
-        paintBtn = new JButton("绘画");
-        paintBtn.setSize(40, 20);
+        final Font inputFont=new Font(Font.MONOSPACED,Font.BOLD,20);
+        paintBtn = new JButton(curState.getText());
+        paintBtn.setBackground(Color.white);
+        paintBtn.setFont(inputFont);
+        paintBtn.setSize(new Dimension(30, 20));
         paintBtn.addActionListener(new DrawButtonListener());
 
-        leftPanel = new JPanel();
-        leftPanel.add(paintBtn);
+        leftPanel = new JPanel(new GridLayout(10, 0));
+        for (int i=0; i<4; i++){leftPanel.add(new JLabel());}
+        leftPanel.setBackground(Color.lightGray);
         this.add(leftPanel, BorderLayout.WEST);
+        leftPanel.add(paintBtn);
     }
 
     /**
@@ -147,6 +156,7 @@ public class PaintingBoardFrame extends JFrame{
     private void initMenu(){
         menuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("文件");
+        fileMenu.setSize(800, 20);
 
         JMenuItem newItem = new JMenuItem("新建");
         newItem.addActionListener(new NewItemActionListener());
@@ -166,7 +176,9 @@ public class PaintingBoardFrame extends JFrame{
         fileMenu.add(saveAsItem);
 
         menuBar.add(fileMenu);
-
+        menuBar.setBorderPainted(true);
+        menuBar.setPreferredSize(new Dimension(10, 20));
+        menuBar.setBackground(Color.getColor("silver"));
         this.setJMenuBar(menuBar);
     }
 
@@ -211,7 +223,7 @@ public class PaintingBoardFrame extends JFrame{
                 case TO_PAINT:
                     //进入绘制状态
                     curState = PaintStateEnum.PAINTING;
-                    paintBtn.setText("结束");
+                    paintBtn.setText(curState.getText());
                     break;
             }
         }
@@ -312,9 +324,9 @@ public class PaintingBoardFrame extends JFrame{
             int x = label.getX();
             int y = label.getY();
             String text = label.getText();
-            Font font = new Font("BOLD",0,15);
-            g.setFont(font);
+            g.setColor(label.getColor());
             g.drawString(text, x, y);
+            g.setColor(Color.BLACK);
         }
 
         private void drawShape(PaintShapeEntity shape){
@@ -335,13 +347,17 @@ public class PaintingBoardFrame extends JFrame{
         }
 
         /**
-         *
+         *得到经过坐标变换的x坐标
          * */
         private int getx(MouseEvent e){
             int x = e.getX()+leftPanel.getWidth();
             x = Math.max(x, leftPanel.getWidth());
             return x;
         }
+
+        /**
+         *得到经过坐标变换的y坐标
+         * */
         private int gety(MouseEvent e){
             int y = e.getY()+menuBar.getHeight();
             y = Math.max(y, menuBar.getHeight());
@@ -365,7 +381,7 @@ public class PaintingBoardFrame extends JFrame{
                 boolean exec = saveCurFileByFileChooser();
                 if (!exec){return;}
             }
-
+            //新建
             openNew();
         }
     }
@@ -374,63 +390,82 @@ public class PaintingBoardFrame extends JFrame{
         @Override
         public void actionPerformed(ActionEvent e) {
             int choice = JOptionPane.NO_OPTION;
-            //没有edit时直接新建
+
+            //若edit过需要询问用户是否保存
             if (isEdited){
                 choice = JOptionPane.showConfirmDialog(null,
                         "是否要保存当前画板",
                         "选择",
                         JOptionPane.YES_NO_CANCEL_OPTION);
             }
+            //取消选择
             if (choice==JOptionPane.CANCEL_OPTION){return;}
+            //保存当前文件再open
             if (choice==JOptionPane.YES_OPTION) {
-                boolean exec = saveCurFileByFileChooser();
-                if (!exec){return;}
+                boolean isSaveSucceed = saveCurFileByFileChooser();
+                if (!isSaveSucceed){return;}
             }
 
+            //得到需要打开的文件路径
             curFilePath = getOpenPathByFileChooser();
             if (curFilePath == null){return;}
             curBoard = paintBoardDao.openPaintBoardByPath(curFilePath);
+
+            //打开失败
             if (curBoard==null){
                 JOptionPane.showMessageDialog(null, "打开错误");
                 return;
             }
+
+            //重画画板
             dl.redrawBoard(curBoard);
 
+            //状态转换
             curShape = new PaintShapeEntity();
             curStroke = new PaintStrokeEntity();
+
             curState = PaintStateEnum.TO_PAINT;
-            paintBtn.setText("绘画");
+            paintBtn.setText(curState.getText());
+
             isEdited = false;
         }
     }
 
+    /**
+     * 另存为按钮响应
+     * */
     class SaveAsItemActionListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            fileChooser.showSaveDialog(menuBar);
-            File f = fileChooser.getSelectedFile();
-            if (f==null){return;}
-            curFilePath = f.getPath();
+            curFilePath = getSavePathByFileChooser();
+            if (curFilePath==null){return;}
             paintBoardDao.savePaintBoardByPath(curBoard, curFilePath);
+
             isEdited = false;
         }
     }
 
+    /**
+     * 保存按钮响应
+     * */
     class SaveItemActionListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
             //如果之前没有保存过
             if (curFilePath == null){
-                fileChooser.showSaveDialog(menuBar);
-                File f = fileChooser.getSelectedFile();
-                if (f==null){return;}
-                curFilePath = f.getPath();
+                curFilePath = getSavePathByFileChooser();
+                if (curFilePath==null){return;}
             }
             paintBoardDao.savePaintBoardByPath(curBoard, curFilePath);
+
             isEdited = false;
         }
     }
 
+    /**
+     * 通过FileChooser储存当前的文件
+     * @return 保存是否成功
+     * */
     private boolean saveCurFileByFileChooser(){
         if (curFilePath == null) {
             curFilePath = getSavePathByFileChooser();
@@ -440,6 +475,9 @@ public class PaintingBoardFrame extends JFrame{
         return true;
     }
 
+    /**
+     * 通过FileChooser得到将要打开的文件路径
+     * */
     private String getOpenPathByFileChooser(){
         fileChooser.showOpenDialog(null);
         File f = fileChooser.getSelectedFile();
@@ -449,6 +487,9 @@ public class PaintingBoardFrame extends JFrame{
         return f.getPath();
     }
 
+    /**
+     * 通过FileChooser得到将要保存的文件路径
+     * */
     private String getSavePathByFileChooser(){
         fileChooser.showSaveDialog(null);
         File f = fileChooser.getSelectedFile();
@@ -459,7 +500,7 @@ public class PaintingBoardFrame extends JFrame{
     }
 
     /**
-     * 打开新
+     * 打开新的文件时状态转换
      * */
     private void openNew(){
         curBoard = new PaintBoardEntity();
@@ -468,7 +509,7 @@ public class PaintingBoardFrame extends JFrame{
         curFilePath = null;
 
         curState = PaintStateEnum.TO_PAINT;
-        paintBtn.setText("绘画");
+        paintBtn.setText(curState.getText());
 
         isEdited = false;
 

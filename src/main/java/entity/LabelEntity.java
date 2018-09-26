@@ -2,6 +2,7 @@ package entity;
 
 import enums.ShapeLabelEnum;
 
+import java.awt.*;
 import java.io.Serializable;
 
 /**
@@ -48,6 +49,19 @@ public class LabelEntity implements Serializable {
      * */
     public String getText(){
         return labelType.getText();
+    }
+
+    public Color getColor(){
+        switch (this.labelType){
+            case CIRCLE:
+                return Color.BLUE;
+            case TRIANGLE:
+                return Color.red;
+            case SQUARE:
+                return Color.GREEN;
+                default:
+                    return Color.BLACK;
+        }
     }
 
 }
