@@ -112,8 +112,8 @@ public class PaintingBoardFrame extends JFrame{
         this.add(centerPanel, BorderLayout.CENTER);
 
         dl = new DrawListener();
-        centerPanel.addMouseMotionListener(dl);
-        centerPanel.addMouseListener(dl);
+        this.addMouseMotionListener(dl);
+        this.addMouseListener(dl);
 
         Graphics2D g = (Graphics2D) this.getGraphics();
         dl.setGraphic(g);
@@ -350,7 +350,7 @@ public class PaintingBoardFrame extends JFrame{
          *得到经过坐标变换的x坐标
          * */
         private int getx(MouseEvent e){
-            int x = e.getX()+leftPanel.getWidth();
+            int x = e.getX();
             x = Math.max(x, leftPanel.getWidth());
             return x;
         }
@@ -359,7 +359,7 @@ public class PaintingBoardFrame extends JFrame{
          *得到经过坐标变换的y坐标
          * */
         private int gety(MouseEvent e){
-            int y = e.getY()+menuBar.getHeight();
+            int y = e.getY();
             y = Math.max(y, menuBar.getHeight());
             return y;
         }
